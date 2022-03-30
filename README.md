@@ -1,6 +1,6 @@
 # agenda_do_valdemir
 
-Agenda
+Esse é um projeto pessoal onde estou aplicando os meus conhecimentos de flutter.
 
 ## Getting Started
 
