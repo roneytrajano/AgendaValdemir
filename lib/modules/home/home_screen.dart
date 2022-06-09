@@ -1,53 +1,83 @@
+import 'package:agenda_do_valdemir/Utils/HexColor.dart';
+import 'package:agenda_do_valdemir/models/horarios.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:table_calendar/table_calendar.dart';
+
+import 'home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    HomeController controller = Get.put(HomeController());
+    controller.getHorarios();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Agenda"),
+        title: Text('Horários'),
       ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('Calendario'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Get.offAndToNamed('/home');
-              },
-            ),
-            ListTile(
-              title: const Text('Splash'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Get.offAndToNamed('/splash');
-              },
-            ),
-          ],
-        ),
-      ),
-      body: TableCalendar(
-        firstDay: DateTime.now().add(const Duration(days: -31)),
-        lastDay: DateTime.now().add(const Duration(days: 31)),
-        focusedDay: DateTime.now(),
+      body: Container(
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return ListView.builder(
+            itemCount: controller.horarios.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  // Text(controller.horarios.value[index].label.toString()),
+                  // Text(controller.horarios.value[index].situacao),
+                  // Checkbox(value: controller.horarios.value[index].situacao == 'Confirmado', onChanged: (bool? value) {} ),
+                  SizedBox(
+                    width: 300,
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 150,
+                              alignment: Alignment.center,
+                              child: Text(
+                                controller.horarios.value[index].label.toString(),
+                                style: const TextStyle(
+                                    fontSize: 20.0,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            const Text('  '),
+                            Container(
+                              width: 105,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 5),
+                              decoration: BoxDecoration(
+                                color: HexColor(
+                                    controller.horarios.value[index].corSituacao),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                controller.horarios.value[index].situacao,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        }),
       ),
     );
   }
