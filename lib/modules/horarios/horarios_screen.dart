@@ -1,12 +1,12 @@
 import 'package:agenda_do_valdemir/Utils/HexColor.dart';
-import 'package:agenda_do_valdemir/models/horarios.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'home_controller.dart';
+import '../../shared/components/menu.dart';
+import 'horarios_controller.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HorariosScreen extends StatelessWidget {
+  const HorariosScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Horários'),
+        centerTitle: true,
+        leading: BackButton(
+            onPressed: () {Get.offAndToNamed('/calendar');}
+        ),
       ),
+      //drawer: const Menu(),
       body: Container(
         child: Obx(() {
           if (controller.isLoading.value) {

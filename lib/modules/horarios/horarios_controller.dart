@@ -1,5 +1,4 @@
-import 'package:agenda_do_valdemir/models/horarios.dart';
-import 'package:agenda_do_valdemir/modules/home/repository/home_repository.dart';
+import 'package:agenda_do_valdemir/modules/horarios/repository/horarios_repository.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class HomeController{
@@ -10,7 +9,7 @@ class HomeController{
   void getHorarios() async {
     isLoading.value = true;
 
-    HomeRepository repository = HomeRepository();
+    HorariosRepository repository = HorariosRepository();
     horarios.value = await repository.getHorarios(date: date);
 
     isLoading.value = false;

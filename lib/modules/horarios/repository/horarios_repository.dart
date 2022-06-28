@@ -1,7 +1,7 @@
 import 'package:agenda_do_valdemir/models/horarios.dart';
 import 'package:dio/dio.dart';
 
-class HomeRepository{
+class HorariosRepository{
   Future<List<Horarios>> getHorarios({required DateTime date }) async {
     try
     {

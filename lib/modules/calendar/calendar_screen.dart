@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../shared/components/menu.dart';
+
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
 
@@ -19,51 +21,25 @@ class _HomeScreenState extends State<CalendarScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Agenda"),
+        centerTitle: true,
       ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('Calendario'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Get.offAndToNamed('/calendar');
-              },
-            ),
-            ListTile(
-              title: const Text('Splash'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Get.offAndToNamed('/splash');
-              },
-            ),
-          ],
-        ),
-      ),
+      //drawer: const Menu(),
       body: TableCalendar(
+        headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true),
         firstDay: DateTime.now(),
         lastDay: DateTime.now().add(const Duration(days: 30)),
         calendarFormat: _calendarFormat,
         focusedDay: _focusedDay,
+        selectedDayPredicate: (DateTime date){
+          return isSameDay(_selectedDay, date);
+        },
         onDaySelected: (selectedDay, focusedDay) {
           if (!isSameDay(_selectedDay, selectedDay)) {
             // Call `setState()` when updating the selected day
             setState(() {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
+              Get.offAndToNamed('/horarios');
             });
           }
         },
