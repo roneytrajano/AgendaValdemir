@@ -7,7 +7,7 @@ class HorariosRepository{
     {
       List<Horarios> horarios = [];
       // arrumar a data passada na api
-      var response = await Dio().get('https://roney-lima.outsystemscloud.com/AgendadovaldemirCoreDB/rest/Horarios/PegarHorariosDia?Dia=2022-03-30');
+      var response = await Dio().get('https://roney-lima.outsystemscloud.com/AgendadovaldemirCoreDB/rest/Horarios/PegarHorariosDia?Dia=$date');
       print(response.data);
 
       if(response.data.toString() == "[]"){

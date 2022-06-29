@@ -10,7 +10,7 @@ class HorariosScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeController controller = Get.put(HomeController());
+    HomeController controller = Get.put(HomeController(Get.arguments));
     controller.getHorarios();
     return Scaffold(
       appBar: AppBar(

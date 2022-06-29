@@ -39,7 +39,8 @@ class _HomeScreenState extends State<CalendarScreen> {
             setState(() {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
-              Get.offAndToNamed('/horarios');
+              //print(selectedDay);
+              Get.offAndToNamed('/horarios', arguments: _selectedDay);
             });
           }
         },
