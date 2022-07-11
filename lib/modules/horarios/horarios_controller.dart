@@ -1,3 +1,4 @@
+import 'package:agenda_do_valdemir/models/sucess.dart';
 import 'package:agenda_do_valdemir/modules/horarios/repository/horarios_repository.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -17,5 +18,12 @@ class HomeController{
     horarios.value = await repository.getHorarios(date: date);
 
     isLoading.value = false;
+  }
+
+  Future<Sucess> setHorario({required DateTime date, required int clienteId, required int horarioId }) async {
+    HorariosRepository repository = HorariosRepository();
+
+    return await repository.setHorario(
+        date: date, clienteId: clienteId, horarioId: horarioId);
   }
 }

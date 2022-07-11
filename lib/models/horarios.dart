@@ -1,4 +1,5 @@
 class Horarios {
+  int? horarioId;
   String? situacao;
   int? order;
   String? label;
@@ -8,6 +9,7 @@ class Horarios {
   Horarios({this.situacao, this.order, this.label, this.cliente, this.corSituacao});
 
   Horarios.fromJson(Map<String, dynamic> json) {
+    horarioId = json['HorarioId'];
     situacao = json['Situacao'];
     order = json['Order'];
     label = json['Label'];
