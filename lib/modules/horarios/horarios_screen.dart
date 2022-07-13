@@ -17,9 +17,6 @@ class HorariosScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Horários'),
         centerTitle: true,
-        leading: BackButton(onPressed: () {
-          Get.offAndToNamed('/calendar');
-        }),
       ),
       //drawer: const Menu(),
       body: Obx(() {
@@ -45,11 +42,15 @@ class HorariosScreen extends StatelessWidget {
                             title: Text("Deseja marcar o horário de ${controller.horarios.value[index].label}?"),
                             actions: [
                               TextButton(
-                                  onPressed: (){
+                                  onPressed: () async {
                                     //arrumar o clienteid
-                                    print(_selectedDay.toString());
-                                    // Future<Sucess> sucess =
+                                    //Sucess response = await
                                     controller.setHorario(date: _selectedDay, clienteId: 2, horarioId: controller.horarios.value[index].horarioId);
+                                    controller.getHorarios();
+
+                                    // if(response.isSucess == true){
+                                    //
+                                    // }
                                     //print(controller.horarios.value[index].horarioId);
                                     // print(sucess.message);
                                     Get.back();

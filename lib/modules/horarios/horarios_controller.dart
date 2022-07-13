@@ -21,9 +21,13 @@ class HomeController{
   }
 
   Future<Sucess> setHorario({required DateTime date, required int clienteId, required int horarioId }) async {
+    isLoading.value = true;
     HorariosRepository repository = HorariosRepository();
 
-    return await repository.setHorario(
-        date: date, clienteId: clienteId, horarioId: horarioId);
+    Sucess response = await repository.setHorario(date: date, clienteId: clienteId, horarioId: horarioId);
+
+    isLoading.value = false;
+
+    return response;
   }
 }

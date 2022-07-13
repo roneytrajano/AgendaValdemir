@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../shared/components/menu.dart';
-
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
 
@@ -40,7 +38,7 @@ class _HomeScreenState extends State<CalendarScreen> {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
               //print(selectedDay);
-              Get.offAndToNamed('/horarios', arguments: _selectedDay);
+              Get.toNamed('/horarios', arguments: _selectedDay);
             });
           }
         },
